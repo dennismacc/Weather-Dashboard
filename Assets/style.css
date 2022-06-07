@@ -8,7 +8,36 @@ header {
     font-size: xx-large;
 }
 
+.wrap-container {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar {
+    height: 100%;
+}
+
+.allWeather {
+    width: 80%;
+    border: 1px solid black;
+}
+
 #search {
     background-color: lightblue;
     color:white;
+    display: flex;
+    flex-direction: row;
+}
+
+#currentWeather {
+    background-color: lightblue;
+    color:white;
+    border: 1px solid black;
+}
+
+#futureWeather {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
 }
