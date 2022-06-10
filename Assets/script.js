@@ -86,6 +86,50 @@ function displayCurrentWeather(data) {
 }
 
 
+// Display future weather
+function displayFutureWeather(data) {
+    console.log(data.daily)
+    forecast.innerHTML = "";
+    var futureWeather = document.createElement('div');
+    futureForecast.innerText = "5 day forecast: ";
+    forecast.append(futureForecast);
+    futureWeatherContainer.innerHTML = "";
+
+    for (var i = 0; i < data.daily.length; i++) {
+      var futureDate = document.createElement('div');
+      var futureTemp = document.createElement('div');
+      var futureHumidity = document.createElement('div');
+      var futureWind = document.createElement('div');
+      var futureUV = document.createElement('div');
+      var futureUVBadge = document.createElement('button');
+      var tempKelvin = data.daily[i].temp.day;
+
+      futureDate.innerText = `${date.format('MM/DD/YYYY')}`
+      futureTemp.innerText = "Temp: " + Math.round((((tempKelvin - 273.15)*1.8)+32)) + "°F";
+      futureWind.innerText = "Wind: " + data.daily[i].wind_speed + " mph";
+      futureHumidity.innerText = "Humidity: " + data.daily[i].humidity + "%";
+      futureUV.innerText = "UV Index: ";
+      futureUVBadge.innerText = data.daily[i].uvi;
+      futureUVBadge.classList.add('badge');
+      
+      if (data.daily[i].uvi <= 2) {
+        futureUVBadge.classList.add('badge-success');
+      } else if (data.daily[i].uvi <= 5) {
+        futureUVBadge.classList.add('badge-warning');
+      } else if (data.daily[i].uvi <= 7) {
+        futureUVBadge.classList.add('badge-danger');
+      }
+
+      futureDate.setAttribute('class', 'card-header')
+      futureTemp.setAttribute('class', 'card-body')
+      futureWind.setAttribute('class', 'card-body')
+      futureHumidity.setAttribute('class', 'card-body')
+      futureUV.append(futureUVBadge)
+      futureWeatherContainer.append(futureDate, futureTemp, futureWind, futureHumidity, futureUV);
+    }
+      var icons = document.createElement('img');
+      icons.setAttribute('src', `http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon + '@2x.png'}`);
+}
   //   .then(weatherRes => weatherRes.json())
   //   .then(weatherData => {
   //     console.log('weather data', weatherData)
