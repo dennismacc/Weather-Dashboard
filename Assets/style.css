@@ -20,7 +20,6 @@ header {
 
 .allWeather {
     width: 80%;
-    border: 1px solid black;
 }
 
 #search {
@@ -33,11 +32,9 @@ header {
 #currentWeather {
     background-color: lightblue;
     color:white;
-    border: 1px solid black;
 }
 
 #futureWeather {
     display: flex;
     justify-content: space-between;
-    border: 1px solid black;
 }
