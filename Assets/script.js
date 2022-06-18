@@ -10,8 +10,7 @@ var cityArray = JSON.parse(localStorage.getItem('searchedCity')) ? JSON.parse(lo
 var inputValue = document.getElementById('#cityInput');
 var searchBtn = document.getElementById('#searchBtn');
 var cardContainer = document.getElementById('#cardContainer');
-var displayCurrentWeather = document.getElementById('#displayCurrent');
-var currentWeather = document.getElementById('#currentWeather');
+var currentWeatherContainer = document.getElementById('#currentWeather');
 var forecast = document.getElementById('#forecast');
 var futureWeather = document.getElementById('#futureWeather');
 var searchHistoryList = document.getElementById('#history');
@@ -56,7 +55,7 @@ document.querySelector('#searchBtn').addEventListener('click', function (event) 
 // Display current weather
 function displayCurrentWeather(data) {
   console.log(data.current)
-  currentWeatherContainer.innerHTML = "";
+  currentWeather.innerHTML = "";
   var cityDate = document.createElement('div');
   var cityTemp = document.createElement('div');
   var cityHumidity = document.createElement('div');
@@ -81,7 +80,8 @@ function displayCurrentWeather(data) {
     cityUVBadge.setAttribute('class', 'btn-danger');
   }
 
-  cardContainer.setAttribute('class', 'card w-75')
+  // cardContainer.setAttribute('class', 'card-container')
+  // cardContainer.setAttribute('class', 'card w-75')
   cityDate.setAttribute('class', 'card-title')
   cityTemp.setAttribute('class', 'card-text')
   cityWind.setAttribute('class', 'card-text')
@@ -91,7 +91,7 @@ function displayCurrentWeather(data) {
   var icons = document.createElement('img');
   icons.setAttribute('src', `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`);
   cityDate.append(icons)
-  currentWeatherContainer.append(cityDate, cityTemp, cityWind, cityHumidity, cityUV);
+  currentWeather.append(cityDate, cityTemp, cityWind, cityHumidity, cityUV);
 }
 
 
@@ -102,7 +102,7 @@ function displayFutureWeather(data) {
   var futureForecast = document.createElement('div');
   futureForecast.innerText = "5-Day Forecast: ";
   forecast.append(futureForecast);
-  futureWeatherContainer.innerHTML = "";
+  futureWeather.innerHTML = "";
 
   for (var i = 0; i < data.daily.length; i++) {
     var futureDate = document.createElement('div');
@@ -112,10 +112,9 @@ function displayFutureWeather(data) {
     var futureUV = document.createElement('div');
     var futureUVBadge = document.createElement('button');
     var tempKelvin = data.daily[i].temp.day;
-    var eachCard = document.createElement('div');
 
     var futureIcons = document.createElement('img');
-    futureIcons = setAttribute('src', `http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png'`);
+    futureIcons.setAttribute('src', `http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png`);
     futureDate.innerText = moment().add(i, 'days').format('MM/DD/YYYY');
     futureTemp.innerText = "Temp: " + Math.round((((tempKelvin - 273.15) * 1.8) + 32)) + "°F";
     futureWind.innerText = "Wind: " + data.daily[i].wind_speed + " mph";
@@ -123,19 +122,20 @@ function displayFutureWeather(data) {
     futureUV.innerText = "UV Index: ";
     futureUVBadge.innerText = data.daily[i].uvi;
     futureUVBadge.classList.add('badge');
+    futureWeather.append(futureDate, futureIcons, futureTemp, futureWind, futureHumidity, futureUV, futureUVBadge);
 
-    if (data.daily[i].uvi <= 2) {
-      futureUVBadge.classList.add('badge-success');
-    } else if (data.daily[i].uvi <= 5) {
-      futureUVBadge.classList.add('badge-warning');
-    } else if (data.daily[i].uvi <= 7) {
-      futureUVBadge.classList.add('badge-danger');
-    }
+    // if (data.daily[i].uvi <= 2) {
+    //   futureUVBadge.classList.add('badge-success');
+    // } else if (data.daily[i].uvi <= 5) {
+    //   futureUVBadge.classList.add('badge-warning');
+    // } else if (data.daily[i].uvi <= 7) {
+    //   futureUVBadge.classList.add('badge-danger');
+    // }
 
-    futureDate.setAttribute('class', 'card-header')
-    futureTemp.setAttribute('class', 'card-body')
-    futureWind.setAttribute('class', 'card-body')
-    futureHumidity.setAttribute('class', 'card-body')
+    futureDate.setAttribute('class', 'card-title');
+    futureTemp.setAttribute('class', 'card-text');
+    futureWind.setAttribute('class', 'card-text');
+    futureHumidity.setAttribute('class', 'card-text');
     futureUV.append(futureUVBadge)
     futureWeather.append(futureDate, futureTemp, futureWind, futureHumidity, futureUV);
   }
