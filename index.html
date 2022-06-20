@@ -20,22 +20,24 @@
     </center>
   </header>
 
-  <div class="wrap-container">
+  <div class="row">
 
-    <aside id="side" class="sidebar w-30">
+    <div class="column1">
       <h2>Search for a City:</h2>
       <input id="cityInput" type="text" placeholder="Search for a city" />
       <button id="searchBtn" class="btn btn-secondary">Search</button>
       <div class="list-group" id="history"></div>
-    </aside>
+    </div>
 
-    <div class="allWeather">
-      <div id="cardContainer">
-        <div id="currentWeather"></div>
+    <div class="column2">
+      <div class="allWeather">
+        <div id="cardContainer">
+          <div id="currentWeather"></div>
+        </div>
+
+        <div id="forecast"></div>
+        <div id="futureWeather"></div>
       </div>
-
-      <div id="forecast"></div>
-      <div id="futureWeather"></div>
     </div>
   </div>
 

@@ -150,6 +150,7 @@ function searchHistory() {
   searchHistoryList.innerHTML = "";
   for (var i = 0; i< cityArray.length; i++) {
     var searchHistoryItem = document.createElement('li');
+    searchHistoryItem.style.listStyleType = 'none';
     searchHistoryItem.innerText = cityArray[i];
     searchHistoryList.append(searchHistoryItem);
     searchHistoryItem.addEventListener('click', function (event) {
