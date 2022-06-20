@@ -148,7 +148,7 @@ function displayFutureWeather(data) {
 // Search history
 function searchHistory() {
   searchHistoryList.innerHTML = "";
-  for (var i = 0; i < cityArray.length; i++) {
+  for (var i = 0; i< cityArray.length; i++) {
     var searchHistoryItem = document.createElement('li');
     searchHistoryItem.innerText = cityArray[i];
     searchHistoryList.append(searchHistoryItem);
